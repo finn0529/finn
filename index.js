@@ -1,7 +1,8 @@
 import 'dotenv/config'
 import linebot from 'linebot'
-import axios from 'axios'
-import cheerio from 'cheerio'
+import flex from './commands/flex.js'
+// import loaction from './經緯度間距離.js'
+import near from './commands/near.js'
 
 const bot = linebot({
   channelId: process.env.CHANNEL_ID,
@@ -10,19 +11,12 @@ const bot = linebot({
 })
 
 bot.on('message', async (event) => {
-  if (event.message.type === 'text' && event.message.text === '課程') {
-    try {
-      const { data } = await axios.get('https://wdaweb.github.io/')
-      const $ = cheerio.load(data)
-      const replies = []
-      for (let i = 0; i < $('#go .col-lg-3.col-md-6').length; i++) {
-        replies.push(`課程報名:\n${$('#go .col-lg-3.col-md-6').eq(i).find('h4').text()}\n報名資訊:\n${$('#go .col-lg-3.col-md-6').eq(3).find('.card-description').text().trim().replace(/\t/g, '')}`)
-      }
-      event.reply(replies)
-    } catch (error) {
-      console.log(error)
-      event.reply('錯誤')
-    }
+  if (event.message.type === 'text') {
+    flex(event)
+  }
+  if (event.message.type === 'location') {
+    near(event)
+    console.log('123')
   }
 })
 
