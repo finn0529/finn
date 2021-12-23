@@ -1,5 +1,4 @@
 import culture from '../culture.js'
-import distance from '../經緯度間距離.js'
 import location from '../template/location.js'
 import cheerio from 'cheerio'
 import axios from 'axios'
@@ -8,7 +7,14 @@ export default async (event) => {
   const replies = []
   try {
     for (let i = 0; i < culture.length; i++) {
-      if (distance(event.message.latitude, event.message.longitude, culture[i].Latitude, culture[i].Longitude, 'K') < 10) {
+      const d = Number(culture[i].EndDateVM.Date.replace(/\//g, '')) + 19110000
+      const newday = d.toString()
+      const dString = newday.slice(0, 4) + '/' + newday.slice(4, 6) + '/' + newday.slice(6)
+      const t1 = new Date().getTime()
+      const t2 = new Date(dString).getTime()
+      const result = t2 - t1
+
+      if (result < 2592000000 && result > 0) {
         replies.push({
           Caption: culture[i].Caption,
           DetailUrl: culture[i].DetailUrl,
@@ -17,6 +23,7 @@ export default async (event) => {
             Date: culture[i].EndDateVM.Date,
             Week: culture[i].EndDateVM.Week
           }
+
         })
       }
     }

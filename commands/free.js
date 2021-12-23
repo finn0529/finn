@@ -1,5 +1,4 @@
 import culture from '../culture.js'
-import distance from '../經緯度間距離.js'
 import location from '../template/location.js'
 import cheerio from 'cheerio'
 import axios from 'axios'
@@ -8,7 +7,7 @@ export default async (event) => {
   const replies = []
   try {
     for (let i = 0; i < culture.length; i++) {
-      if (distance(event.message.latitude, event.message.longitude, culture[i].Latitude, culture[i].Longitude, 'K') < 10) {
+      if (culture[i].TicketType === '免費') {
         replies.push({
           Caption: culture[i].Caption,
           DetailUrl: culture[i].DetailUrl,
