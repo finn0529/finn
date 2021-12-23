@@ -3,7 +3,7 @@
 ![alt](./img/IMG_9450.jpg)
 ## 添加機器人
 ***
-![alt](./img/IMG_9451.png)
+![alt](./img/IMG_9451.jpg)
 ## Bot 託管在 heroku free dyno 上，在空閒時間用完後將停止運行
 ***
 ## 指令用法
