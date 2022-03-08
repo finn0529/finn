@@ -1,5 +1,6 @@
 # 展覽機器人
 ***
+<img src="./img/IMG_9450.jpgg" width="350">
 ![alt](./img/IMG_9450.jpg width="350")
 ## 添加機器人
 ***
